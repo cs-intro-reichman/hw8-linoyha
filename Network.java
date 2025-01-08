@@ -62,7 +62,7 @@ public class Network {
      *  If any of the two names is not a user in this network,
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
-        if (getUser(name1)!= null && getUser(name2)!= null && name1 != name2) {
+        if ((getUser(name1)!= null && getUser(name2)!= null) && name1 != name2) {
             if(getUser(name1).addFollowee(name2))
             return true;
         }
@@ -94,7 +94,7 @@ public class Network {
         String namemax = "";
         for (int i = 0; i < userCount; i++) {
             if (followeeCount(users[i].getName()) > max) {
-                namemax = namemax + users[i].getName();
+                namemax = users[i].getName();
 
             }
         }
