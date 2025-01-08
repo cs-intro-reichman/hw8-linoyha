@@ -29,8 +29,11 @@ public class Network {
      *  If there is no such user, returns null.
      *  Notice that the method receives a String, and returns a User object. */
     public User getUser(String name) {
+        name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
         for (int i = 0; i < userCount; i++) {
-            if (users[i].getName().equals(name)) {
+            name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
+            String name2 = Character.toUpperCase(users[i].getName().charAt(0)) + users[i].getName().substring(1);
+            if (name2.equals(name)) {
                 return users[i];
             }
         }
@@ -59,7 +62,7 @@ public class Network {
      *  If any of the two names is not a user in this network,
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
-        if (getUser(name1)!= null && getUser(name2)!= null) {
+        if (getUser(name1)!= null && getUser(name2)!= null && name1 != name2) {
             if(getUser(name1).addFollowee(name2))
             return true;
         }
@@ -114,7 +117,7 @@ public class Network {
     public String toString() {
        String ans = "Network:\n";
        for (int i = 0; i < userCount; i++) {
-        ans = ans + users[i].toString();
+        ans = ans + "\n" + users[i].toString();
        }
        return ans;
     }
