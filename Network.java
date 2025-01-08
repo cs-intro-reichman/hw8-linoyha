@@ -51,6 +51,7 @@ public class Network {
             }
         }
         users[userCount] = new User(name);
+        userCount++;
         return true;
     }
 
@@ -59,7 +60,7 @@ public class Network {
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
         if (getUser(name1)!= null && getUser(name2)!= null) {
-            getUser(name1).addFollowee(name2);
+            if(getUser(name1).addFollowee(name2))
             return true;
         }
         return false;
@@ -67,7 +68,7 @@ public class Network {
     
     /** For the user with the given name, recommends another user to follow. The recommended user is
      *  the user that has the maximal mutual number of followees as the user with the given name. */
-    public User recommendWhoToFollow(String name) {
+    public String recommendWhoToFollow(String name) {
         User mostRecommendedUserToFollow = null;
         int max = 0;
         User user1 = getUser(name);
@@ -80,17 +81,17 @@ public class Network {
                  mostRecommendedUserToFollow = users[i];
             }
         }
-        return mostRecommendedUserToFollow;
+        return mostRecommendedUserToFollow.getName();
     }
 
     /** Computes and returns the name of the most popular user in this network: 
      *  The user who appears the most in the follow lists of all the users. */
     public String mostPopularUser() {
         int max = 0;
-        String namemax ="";
+        String namemax = "";
         for (int i = 0; i < userCount; i++) {
             if (followeeCount(users[i].getName()) > max) {
-                namemax = users[i].getName();
+                namemax += users[i].getName();
 
             }
         }
@@ -113,7 +114,7 @@ public class Network {
     public String toString() {
        String ans = "Network:\n";
        for (int i = 0; i < userCount; i++) {
-        ans = ans + users[i].toString() +"\n";
+        ans = ans + users[i].toString();
        }
        return ans;
     }
