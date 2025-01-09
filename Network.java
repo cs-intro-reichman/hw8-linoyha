@@ -100,6 +100,7 @@ public class Network {
         // maybe to add the number of the follows on the user (who they follow)//
         for (int i = 0; i < userCount; i++) {
             if (followeeCount(users[i].getName()) > max) {
+                max = followeeCount(users[i].getName());
                 namemax = users[i].getName();
 
             }
