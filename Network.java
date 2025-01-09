@@ -99,7 +99,7 @@ public class Network {
         String namemax = "null";
         // maybe to add the number of the follows on the user (who they follow)//
         for (int i = 0; i < userCount; i++) {
-            if (followeeCount(users[i].getName()) + users[i].getfCount() > max) {
+            if (followeeCount(users[i].getName()) > max) {
                 namemax = users[i].getName();
 
             }
